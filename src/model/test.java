@@ -1,4 +1,4 @@
-package pojo;
+package model;
 
 public class test {
 	private int id;

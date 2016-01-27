@@ -5,7 +5,7 @@
  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
 
 <hibernate-mapping>
-   <class name="pojo.Coke" table="Item">
+   <class name="model.Coke" table="Item">
       <id name="id" type="int" column="id">
          <generator class="increment" />
       </id>

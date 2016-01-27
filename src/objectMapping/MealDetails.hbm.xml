@@ -5,12 +5,13 @@
  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
 
 <hibernate-mapping>
-   <class name="pojo.ChickenBurger" table="Item">
-      <id name="id" type="int" column="id">
+   <class name="model.MealDetails" table="MealDetails">
+      <id name="mealDetailsId" type="int" column="mealDetailsId">
          <generator class="increment" />
       </id>
-      <property name="name" column="name" type="string"/>
+      <property name="mealId" column="mealId" type="int"/>
+      <property name="itemId" column="itemId" type="int"/>
       <property name="price" column="price" type="float"/>
-      <property name="itemType" column="itemType" type="string"/>
+      <property name="qty" column="qty" type="int"/>
    </class>
 </hibernate-mapping>

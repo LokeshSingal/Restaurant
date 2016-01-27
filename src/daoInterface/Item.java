@@ -1,4 +1,4 @@
-package pojo;
+package daoInterface;
 
 public interface Item {
 	public void setId(int id);

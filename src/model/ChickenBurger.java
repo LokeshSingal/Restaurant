@@ -1,6 +1,9 @@
-package pojo;
+package model;
 
-public class VegBurger extends Burger{
+import daoAbstract.Burger;
+
+
+public class ChickenBurger extends Burger{
 	private int id;
 	private float price;
 	private String name=this.getName();

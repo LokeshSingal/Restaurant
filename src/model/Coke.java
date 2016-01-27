@@ -1,10 +1,12 @@
-package pojo;
+package model;
 
-public class ChickenBurger extends Burger{
+import daoAbstract.Softdrink;
+
+public class Coke extends Softdrink {
 	private int id;
 	private float price;
 	private String name=this.getName();
-	private String itemType="Burger";
+	private String itemType="Softdrink";
 	@Override
 	public void setPrice(float price) {
 		// TODO Auto-generated method stub

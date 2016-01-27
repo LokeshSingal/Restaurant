@@ -1,4 +1,6 @@
-package pojo;
+package model;
+
+import daoAbstract.Softdrink;
 
 public class Pepsi extends Softdrink{
 	private int id;
