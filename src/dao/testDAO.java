@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import pojo.VegBurger;
 import pojo.test;
 
 public class testDAO{
@@ -19,9 +20,10 @@ public void add(){
           System.out.println("1");
           Transaction tx = session.beginTransaction();
 
-          test t1=new test();  
-          t1.setId(115);  
-          t1.setName("Hello");
+          VegBurger t1=new VegBurger();  
+          
+          t1.setName("Item1");
+          t1.setPrice(100);
 
           session.save(t1);
           tx.commit();
