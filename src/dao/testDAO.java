@@ -2,13 +2,20 @@ package dao;
 
 
 
+import java.util.List;
+
 import model.VegBurger;
 import model.test;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+
+import daoInterface.Item;
+
+
 
 
 public class testDAO{
@@ -28,5 +35,23 @@ public void add(){
 
           session.save(t1);
           tx.commit();
+}
+
+public void getAllItem(){
+	System.out.println("1");
+	SessionFactory sf=new Configuration().configure().buildSessionFactory();
+	 System.out.println("1");
+          Session session = sf.openSession();
+          System.out.println("1");
+          //Transaction tx = session.beginTransaction();
+
+          Query query=session.createQuery("from Item");//here persistent class name is Emp  
+          List<VegBurger> list=query.list();  
+
+          //tx.commit();
+          
+          for (Object object : list) {
+			System.out.println(object);
+		}
 }
 }

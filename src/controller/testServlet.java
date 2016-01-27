@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.MealBuilder;
 import dao.testDAO;
 
 /**
@@ -30,6 +31,13 @@ public class testServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		System.out.println("1");
+		//testDAO t1 = new testDAO();
+		//t1.getAllItem();
+		
+		MealBuilder mb = new MealBuilder();
+		mb.getAllItem();
+		
 	}
 
 	/**
@@ -38,8 +46,11 @@ public class testServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		System.out.println("Called Servlet");
-		testDAO t1=new testDAO();
-		t1.add();
+		MealBuilder mb = new MealBuilder();
+		mb.add();
+		
+		//testDAO t1=new testDAO();
+		//t1.add();
 	}
 
 }
