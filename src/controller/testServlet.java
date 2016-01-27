@@ -36,6 +36,7 @@ public class testServlet extends HttpServlet {
 		//t1.getAllItem();
 		
 		MealBuilder mb = new MealBuilder();
+		mb.add();
 		mb.getAllItem();
 		
 	}
@@ -46,8 +47,9 @@ public class testServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		System.out.println("Called Servlet");
-		MealBuilder mb = new MealBuilder();
-		mb.add();
+		testDAO t1=new testDAO();
+		t1.add();
+		t1.getAllItem();
 		
 		//testDAO t1=new testDAO();
 		//t1.add();

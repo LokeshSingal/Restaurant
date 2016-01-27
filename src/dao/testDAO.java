@@ -45,13 +45,17 @@ public void getAllItem(){
           System.out.println("1");
           //Transaction tx = session.beginTransaction();
 
-          Query query=session.createQuery("from Item");//here persistent class name is Emp  
-          List<VegBurger> list=query.list();  
-
+          Query query=session.createQuery("from VegBurger");//here persistent class name is Emp  
+          List<Item> l1=query.list();
+          for(Item a: l1){
+        	  System.out.println(a.getId()+" "+a.getName()+" ");
+        	  a.setPrice(99);
+        	  Transaction tx = session.beginTransaction();
+        	  session.saveOrUpdate(a);
+        	  tx.commit();
+          }
+          
           //tx.commit();
           
-          for (Object object : list) {
-			System.out.println(object);
-		}
 }
 }

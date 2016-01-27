@@ -11,17 +11,18 @@
 		<property name="hibernate.connection.url">
 			jdbc:mysql://localhost:3306/restaurant</property>
 		<property name="hibernate.connection.username">root</property>
-		<property name="hibernate.connection.password">root</property>
+		<property name="hibernate.connection.password"></property>
 		<property name="hibernate.connection.pool_size">1</property>
 		<property name="show_sql">true</property>
 		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="hibernate.hbm2ddl.auto">update</property>
 		<mapping resource="objectMapping/testMapping.hbm.xml"/>
-		<mapping resource="objectMapping/VegBurger.hbm.xml"/>
+		<mapping resource="objectMapping/Meal.hbm.xml"/>
+		<mapping resource="objectMapping/MealDetails.hbm.xml"/>
+		<mapping resource="objectMapping/Item.hbm.xml"/>
 		<mapping resource="objectMapping/ChickenBurger.hbm.xml"/>
 		<mapping resource="objectMapping/Coke.hbm.xml"/>
 		<mapping resource="objectMapping/Pepsi.hbm.xml"/>
-		<mapping resource="objectMapping/Meal.hbm.xml"/>
-		<mapping resource="objectMapping/MealDetails.hbm.xml"/>
+		<mapping resource="objectMapping/VegBurger.hbm.xml"/>
 	</session-factory>
 </hibernate-configuration>
