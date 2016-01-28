@@ -38,23 +38,31 @@ public class testServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		System.out.println("1");
 		testDAO t1 = new testDAO();
+		MealBuilder mb = new MealBuilder();
 		//
-		if (request.getParameter("addmealdetail") != null) {
+		if (request.getParameter("displaymealdetail") != null) {
+			String TextValue2=t1.getAllItemMeal();
+			System.out.println(TextValue2);
+			request.setAttribute("TextValue2",TextValue2);
+			RequestDispatcher rd=request.getRequestDispatcher("/NewFile.jsp");
+			rd.forward(request,response);
+		
 		    
 		}
-		else if (request.getParameter("generatebill") != null) {
-		    // Invoke action 2.
-		}
+		
 		else if (request.getParameter("addmeal") != null) {
+			doPost(request, response);
 		    
 		}
 
 		else if (request.getParameter("displaymeal") != null) {
-			MealBuilder mb = new MealBuilder();
-			//doPost(request, response);
-			mb.addNewMeal();
+			String TextValue1=t1.getAllMeal();
+			System.out.println(TextValue1);
+			request.setAttribute("TextValue1",TextValue1);
+			RequestDispatcher rd=request.getRequestDispatcher("/NewFile.jsp");
+			rd.forward(request,response);
 			
-			//mb.getAllItem();
+			
 		}
 		else if (request.getParameter("displayitems") != null) {
 			String TextValue=t1.getAllItem();
