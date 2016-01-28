@@ -7,8 +7,23 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="testServlet" method="post">
-<input type="submit" value="submit" name="submit"/>
+<form action="testServlet" method="get">
+<input type="submit" value="Add meal" name="addmeal"/><br>
+
+
+<input type="submit" name="displayitems" value="Display Items" /><br>
+<%=request.getAttribute("TextValue")%>
+<br>
+<br>
+<br>
+<input type="submit" name="displaymeal" value="Display Meal" /><br>
+<%=request.getAttribute("TextValue1")%>
+<br>
+<br>
+<br>
+<input type="submit" name="displaymealdetail" value="Display Meal Detail" /><br>
+<%=request.getAttribute("TextValue2")%>
+
 </form>
 </body>
 </html>
