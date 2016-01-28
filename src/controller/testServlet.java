@@ -8,13 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-
-
-
-
+import org.json.*;
 import java.util.List;
-
 import dao.MealBuilder;
 import dao.testDAO;
 
@@ -24,6 +19,7 @@ import dao.testDAO;
 @WebServlet("/testServlet")
 public class testServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final Class<Object> Object = null;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -42,13 +38,6 @@ public class testServlet extends HttpServlet {
 		//testDAO t1 = new testDAO();
 		//t1.getAllItem();
 		
-		MealBuilder mb = new MealBuilder();
-		System.out.println( " Meal Id =" + mb.addNewMeal() );
-		mb.updateTotalAmount(200, 1);
-		
-		//mb.getAllItem();
-		
-		
 	}
 
 	/**
@@ -58,25 +47,30 @@ public class testServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		System.out.println("Called Servlet");
 		//String val = (String)request.getParameter("items");
-		StringBuffer jb = new StringBuffer();
+		
+		MealBuilder mb = new MealBuilder();
+		
+		
+		int mealId = mb.addNewMeal();
+		
+		StringBuilder jb = new StringBuilder();
 	      String line = null;
 	      try {
-	        BufferedReader reader = request.getReader();
-	        while ((line = reader.readLine()) != null)
+
+	    	  BufferedReader reader = request.getReader();
+	    	  
+	   while ((line = reader.readLine()) != null)
 	          jb.append(line);
-	        System.out.println(jb.toString());
+	        JSONArray jsonArray = new JSONArray(jb.toString());
+	             
+	        System.out.println(jsonArray);
+
+			mb.addMealDetails(mealId, jsonArray);
+	        
 	      } catch (Exception e) { 
 	          e.printStackTrace();        
 	      }
-		//System.out.println(val);
 		
-		
-		//testDAO t1=new testDAO();
-		//t1.add();
-		//t1.getAllItem();
-		
-		//testDAO t1=new testDAO();
-		//t1.add();
 	}
 
 }
