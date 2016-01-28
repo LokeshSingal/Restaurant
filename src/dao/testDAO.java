@@ -37,7 +37,7 @@ public void add(){
           tx.commit();
 }
 
-public void getAllItem(){
+public String getAllItem(){
 	System.out.println("1");
 	SessionFactory sf=new Configuration().configure().buildSessionFactory();
 	 System.out.println("1");
@@ -47,15 +47,22 @@ public void getAllItem(){
 
           Query query=session.createQuery("from VegBurger");//here persistent class name is Emp  
           List<Item> l1=query.list();
+          String t1=null,t2=null;
           for(Item a: l1){
-        	  System.out.println(a.getId()+" "+a.getName()+" ");
+        	  
         	  a.setPrice(99);
         	  Transaction tx = session.beginTransaction();
         	  session.saveOrUpdate(a);
         	  tx.commit();
+        	  t2=a.getId()+" "+a.getName()+" ";
+        	  //System.out.println(t2);
+        	  t1=t1+t2;
+
+   	       
           }
           
           //tx.commit();
-          
+         // System.out.println(t1);
+          return t1;
 }
 }
