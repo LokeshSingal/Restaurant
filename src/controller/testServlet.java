@@ -2,12 +2,16 @@ package controller;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import org.json.*;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.*;
+
 
 
 
@@ -39,15 +43,33 @@ public class testServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		System.out.println("1");
-		//testDAO t1 = new testDAO();
-		//t1.getAllItem();
-		
-		MealBuilder mb = new MealBuilder();
-		mb.add();
-		mb.getAllItem();
+		testDAO t1 = new testDAO();
+		//
+		if (request.getParameter("addmealdetail") != null) {
+		    
+		}
+		else if (request.getParameter("generatebill") != null) {
+		    // Invoke action 2.
+		}
+		else if (request.getParameter("addmeal") != null) {
+		    
+		}
+
+		else if (request.getParameter("displaymeal") != null) {
+			MealBuilder mb = new MealBuilder();
+			mb.add();
+			mb.getAllItem();
+		}
+		else if (request.getParameter("displayitems") != null) {
+			String TextValue=t1.getAllItem();
+			System.out.println(TextValue);
+			request.setAttribute("TextValue",TextValue);
+			RequestDispatcher rd=request.getRequestDispatcher("/NewFile.jsp");
+			rd.forward(request,response);
+		   
 		
 	}
-
+}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -62,10 +84,16 @@ public class testServlet extends HttpServlet {
 	        while ((line = reader.readLine()) != null)
 	          jb.append(line);
 	        System.out.println(jb.toString());
+	       
+	        
+	      
 	      } catch (Exception e) { 
 	          e.printStackTrace();        
 	      }
-		//System.out.println(val);
+		
+		           
+		        
+	
 		
 		
 		//testDAO t1=new testDAO();
