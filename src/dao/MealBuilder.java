@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import model.Meal;
+import model.MealDetails;
 import model.VegBurger;
 
 import org.hibernate.Query;
@@ -12,11 +13,16 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.simple.JSONObject;
 
 import daoInterface.Item;
 
 public class MealBuilder {
-
+	
+	int totalAmount = 0;
+	
 	public int addNewMeal(){
 		
 		System.out.println("MealBuilder addnewMeal");
@@ -46,7 +52,7 @@ public class MealBuilder {
 	          return id;
 	}
 	
-	public void updateTotalAmount(int amount,int mealId){
+	public void updateTotalAmount(int mealId){
 		
 		System.out.println("MealBuilder UpdateTotalAmount");
 		SessionFactory sf = new Configuration().configure().buildSessionFactory();
@@ -58,51 +64,80 @@ public class MealBuilder {
 		
 		
 		Meal m = (Meal) query.uniqueResult();
-		m.setTotalPrice(amount);
+		m.setTotalPrice(totalAmount);
 		
 		Transaction tx = session.beginTransaction();
       	session.saveOrUpdate(m);
       	  tx.commit();
      
 		
+	}
+	
+	public void addMealDetails(int mealId, JSONArray array) throws JSONException{
+		
+		MealDetails[] m2 = getItemDetails(array, mealId);
+		
+		System.out.println("Add Meal Details");
+		
+		SessionFactory sf = new Configuration().configure().buildSessionFactory();
+		Session session = sf.openSession();
+		Query query = session.createQuery("from MealDetails");
+		
+		for (MealDetails mealDetails : m2) {
+			
+			Transaction tx = session.beginTransaction();
+			session.saveOrUpdate(mealDetails);
+			tx.commit();
+			
+		}
+		
+		updateTotalAmount(mealId);
 		
 	}
 	
-	public void addMealDetails(){
+	public MealDetails[] getItemDetails(JSONArray array,int mealId) throws JSONException{
 		
-	}
-	public void getAllItemDetails(){
-		
-		System.out.println("Get all item details");
-		SessionFactory sf=new Configuration().configure().buildSessionFactory();
-		 System.out.println("1");
-	          Session session = sf.openSession();
-	          System.out.println("1");
-	          //Transaction tx = session.beginTransaction();
-
-	          Query query=session.createQuery("from Meal");//here persistent class name is Emp  
-	          List<Meal> l = query.list();
-	          System.out.println(l);
-	}
-
-	public int getMealID(){
-		
-		System.out.println("Get meal id");
+		System.out.println("Get item details");
 		SessionFactory sf=new Configuration().configure().buildSessionFactory();
 		 
 	          Session session = sf.openSession();
 	     
-	     
+	          //Transaction tx = session.beginTransaction();
 
-	          Query query=session.createQuery("from Meal order by mealId DESC");//here persistent class name is Emp
-	          query.setMaxResults(1);
-	          Meal m = (Meal) query.uniqueResult();
+	          Query query=session.createQuery("from VegBurger");//here persistent class name is Emp  
+	          List<VegBurger> l = query.list();
 	          
 	          
-	          System.out.println(m.getMealId());
-		
-		return m.getMealId();
+	          MealDetails[] m1=new MealDetails[array.length()];
+	          
+				
+	        	  for (int i = 0; i < array.length(); i++) {
+	        		  
+	        			org.json.JSONObject rec = array.getJSONObject(i);
+	        		    int id = rec.getInt("id");
+	        		    int qty = rec.getInt("qty");
+	        		    
+	        		  for (VegBurger item : l) {
+	        			  
+	        		    if(id == item.getId()){
+	        		    	
+	        		    	totalAmount += item.getPrice()*qty;
+	        		    	m1[i] = new MealDetails();
+	        		    	m1[i].setItemId(id);
+	        		    	m1[i].setMealId(mealId);
+	        		    	m1[i].setPrice(item.getPrice());
+	        		    	m1[i].setQty(qty);
+	        		    	
+	        		    }
+				}
+	        	  
+	        	 
+			}
+	          System.out.println("total amount : " + totalAmount);
+	        	  return m1;
+	          
 	}
+
 	
 	
 }
