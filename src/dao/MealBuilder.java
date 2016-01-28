@@ -30,9 +30,11 @@ public class MealBuilder {
 	     	 
 	          m1.setMealId(2);
 	          m1.setTotalPrice(0);
+	          int id=0;
 	          m1.setMealTime(new Timestamp(date.getTime()));
-	          session.save(m1);
+	          id=(Integer)session.save(m1);
 	          tx.commit();
+	          System.out.println("ID ADDED :"+id);	
 	}
 	
 	public void getAllItem(){
