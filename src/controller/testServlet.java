@@ -36,8 +36,11 @@ public class testServlet extends HttpServlet {
 		//t1.getAllItem();
 		
 		MealBuilder mb = new MealBuilder();
-		mb.add();
-		mb.getAllItem();
+		System.out.println( " Meal Id =" + mb.addNewMeal() );
+		mb.updateTotalAmount(200, 1);
+		
+		//mb.getAllItem();
+		
 		
 	}
 
